@@ -1,7 +1,6 @@
 <template>
   <div>
     <img src="@/icons/tua_logo.png" alt="" />
-    test page
   </div>
 </template>
 
@@ -15,6 +14,6 @@ export default {
 
 <style lang="scss" scoped>
 div {
-  background-color: green;
+  background-color: #fff;
 }
 </style>

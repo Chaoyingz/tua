@@ -1,4 +1,5 @@
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 const { version } = require("./package.json");
 const { VueLoaderPlugin } = require("vue-loader");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -87,7 +88,8 @@ const config = {
           return JSON.stringify(jsonContent, null, 2);
         }
       }
-    ])
+    ]),
+    new Dotenv({ path: ".env.local" })
   ]
 };
 

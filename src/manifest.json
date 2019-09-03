@@ -17,7 +17,7 @@
       "128": "icons/tua_logo.png"
     },
     "default_title": "Tuà 翻译",
-    "default_popup": "popup.html"
+    "default_popup": "popup/popup.html"
   },
   "permissions": [
     "activeTab",
