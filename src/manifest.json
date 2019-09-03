@@ -1,0 +1,39 @@
+{
+  "name": "tua",
+  "version": "0.0.1",
+  "description": "tua Translation",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/tua_logo.png",
+    "32": "icons/tua_logo.png",
+    "48": "icons/tua_logo.png",
+    "128": "icons/tua_logo.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/tua_logo.png",
+      "32": "icons/tua_logo.png",
+      "48": "icons/tua_logo.png",
+      "128": "icons/tua_logo.png"
+    },
+    "default_title": "Tuà 翻译",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "contextMenus",
+    "https://fanyi-api.baidu.com/"
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"]
+    }
+  ]
+}
