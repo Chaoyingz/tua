@@ -1,6 +1,11 @@
 <template>
   <transition name="bounce">
-    <div class="content" :style="pos" v-show="!isHide">
+    <div
+      class="content"
+      :style="pos"
+      v-show="!isHide"
+      v-mouseup-outside="mouseUp"
+    >
       {{ result }}
     </div>
   </transition>
@@ -20,12 +25,6 @@ export default {
       },
       isHide: true
     };
-  },
-  mounted() {
-    window.addEventListener("mouseup", this.mouseUp);
-  },
-  destroyed() {
-    window.removeEventListener("mouseup", this.mouseUp);
   },
   methods: {
     /**
