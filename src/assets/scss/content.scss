@@ -29,6 +29,16 @@
         align-items: center;
         padding: 0 6px;
         font: unset;
+        box-shadow: unset;
+        min-height: unset;
+
+        &:hover {
+          color: unset;
+          background-color: unset;
+          border-color: unset;
+          box-shadow: unset;
+        }
+
         &:hover svg {
           fill: #E5E5E5;
         }

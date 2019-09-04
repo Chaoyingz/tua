@@ -2,7 +2,6 @@ import Vue from "vue";
 import App from "./Content.vue";
 import Storage from "@/storage";
 import VueClipboard from "vue-clipboard2";
-import Notifications from "vue-notification";
 import { mouseupOutside } from "@/directive";
 
 /**
@@ -19,8 +18,6 @@ Vue.directive("mouseup-outside", mouseupOutside);
 
 VueClipboard.config.autoSetContainer = true;
 Vue.use(VueClipboard);
-
-Vue.use(Notifications);
 
 Vue.use({
   install: Vue => {
