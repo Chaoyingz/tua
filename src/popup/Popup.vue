@@ -5,38 +5,29 @@
         <img src="@/assets/img/tua-logo-text.svg" alt="tua translate" />
       </div>
       <div class="switch">
-        <input
-          type="checkbox"
-          v-model="isTrans"
-          @change="setStorage({ statusTrans: isTrans ? 'on' : 'off' })"
-          id="switch"
-        /><label for="switch">开关</label>
+        <input type="checkbox" v-model="isTuaOn" id="switch" /><label
+          for="switch"
+          >开关</label
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { KEY_STATUS_TUA } from "@/constant";
 export default {
   data() {
     return {
-      isTrans: true
+      isTuaOn: true
     };
   },
-  mounted() {
-    console.log(this.getStorage("statusTrans"));
-    this.isTrans = this.getStorage("statusTrans") === "off" ? false : true;
+  async mounted() {
+    this.isTuaOn = await this.$storage.get(KEY_STATUS_TUA);
   },
-  methods: {
-    setStorage(kv) {
-      // eslint-disable-next-line no-undef
-      chrome.storage.local.set(kv);
-    },
-    getStorage(key) {
-      // eslint-disable-next-line no-undef
-      chrome.storage.local.get(key, function(result) {
-        return result[key];
-      });
+  watch: {
+    isTuaOn: function(val) {
+      this.$storage.set(KEY_STATUS_TUA, val);
     }
   }
 };

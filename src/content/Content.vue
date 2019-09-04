@@ -3,7 +3,7 @@
     <div
       class="content"
       :style="pos"
-      v-show="!isHide"
+      v-show="!isHide && tuaOn"
       v-mouseup-outside="mouseUp"
     >
       {{ result }}
@@ -23,9 +23,11 @@ export default {
         top: "0px",
         left: "0px"
       },
-      isHide: true
+      isHide: true,
+      tuaOn: true
     };
   },
+  mounted() {},
   methods: {
     /**
      * Listen mouseUp event

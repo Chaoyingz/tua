@@ -3,7 +3,7 @@
   height: 500px;
   box-sizing: border-box;
   background-color: #f7f7f7;
-  
+
   &-header {
     padding: 0 10px;
     height: 40px;
@@ -11,7 +11,6 @@
     display: flex;
     background-color: #fff;
     justify-content: space-between;
-    // box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     .logo {
       font-size: 16px;
@@ -60,4 +59,6 @@
     
     }
   }
+
+  
 }

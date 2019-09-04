@@ -3,17 +3,17 @@
   width: 400px;
   line-height: 26px;
   min-height: 46px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 10px;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   z-index: 9999;
   font-size: 14px;
   border-radius: 4px;
   box-sizing: border-box;
   padding: 8px 10px;
-  background-color: rgba(0,0,0,0.84);
+  background-color: rgba(0, 0, 0, 0.84);
   text-align: left;
   letter-spacing: 1px;
   color: #ffffff;
-  border-top: 4px solid #31D74B;
+  border-top: 4px solid #FFFF99;
   font-family: 'Noto Sans SC', -apple-system, Helvetica Neue sans-serif;
   transition: top .2s ease, left .2s ease;
 }

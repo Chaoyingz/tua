@@ -1,27 +1,15 @@
 import Vue from "vue";
 import App from "./Content.vue";
+import { mouseupOutside } from "@/directive";
 
-function createApp() {
+function createContentApp() {
   let app = document.createElement("div");
   app.setAttribute("id", "tua-app");
   document.body.appendChild(app);
 }
+createContentApp();
 
-createApp();
-
-Vue.directive("mouseup-outside", {
-  bind(el, binding, vnode) {
-    el.monuseUpEvent = function(event) {
-      if (!(el == event.target || el.contains(event.target))) {
-        vnode.context[binding.expression](event);
-      }
-    };
-    document.body.addEventListener("mouseup", el.monuseUpEvent);
-  },
-  unbind(el) {
-    document.body.removeEventListener("mouseup", el.monuseUpEvent);
-  }
-});
+Vue.directive("mouseup-outside", mouseupOutside);
 
 new Vue({
   el: "#tua-app",
