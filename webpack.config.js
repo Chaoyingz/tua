@@ -44,7 +44,7 @@ const config = {
         use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg|ico)$/,
+        test: /\.(png|jpg|jpeg|gif|ico)$/,
         loader: "url-loader",
         options: {
           limit: 10000,
@@ -54,6 +54,10 @@ const config = {
       {
         test: /\.scss$/,
         use: ["vue-style-loader", "css-loader", "sass-loader"]
+      },
+      {
+        test: /\.svg$/,
+        loader: "vue-svg-loader"
       }
     ]
   },

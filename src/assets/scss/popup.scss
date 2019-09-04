@@ -12,19 +12,23 @@
     background-color: #fff;
     justify-content: space-between;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
     .logo {
       font-size: 16px;
+
       img {
         height: 16px;
         margin-top: 11px;
       }
     }
+
     .switch {
-      input[type=checkbox]{
+      input[type=checkbox] {
         height: 0;
         width: 0;
         visibility: hidden;
       }
+
       label {
         position: relative;
         top: -30px;
@@ -36,7 +40,7 @@
         display: block;
         border-radius: 20px;
       }
-      
+
       label:after {
         content: '';
         position: absolute;
@@ -48,17 +52,17 @@
         border-radius: 16px;
         transition: .3s ease;
       }
-      
-      input:checked + label {
+
+      input:checked+label {
         background: #31D74B;
       }
-      
-      input:checked + label:after {
+
+      input:checked+label:after {
         left: 22px;
       }
-    
+
     }
   }
 
-  
+
 }

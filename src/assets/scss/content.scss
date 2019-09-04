@@ -1,36 +1,90 @@
-.content {
+.tua-content {
   position: absolute;
   width: 400px;
   line-height: 26px;
   min-height: 46px;
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   z-index: 9999;
   font-size: 14px;
-  border-radius: 4px;
+  border-radius: 3px;
   box-sizing: border-box;
-  padding: 8px 10px;
   background-color: rgba(0, 0, 0, 0.84);
-  text-align: left;
-  letter-spacing: 1px;
-  color: #ffffff;
-  border-top: 4px solid #FFFF99;
-  font-family: 'Noto Sans SC', -apple-system, Helvetica Neue sans-serif;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   transition: top .2s ease, left .2s ease;
+
+  &-menu {
+    display: flex;
+    height: 34px;
+    line-height: 32px;
+    background-color: #393939;
+    padding: 10px 2px;
+    box-sizing: border-box;
+
+    &__item {
+      width: 42px;
+      border-right: 1px solid #757575;
+
+      button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 6px;
+        font: unset;
+        &:hover svg {
+          fill: #E5E5E5;
+        }
+      }
+
+      svg {
+        height: 100%;
+        width: 17px;
+        fill: #CCCCCC;
+        transition: fill .3s;
+      }
+    }
+  }
+
+  &-result {
+    text-align: left;
+    letter-spacing: 1px;
+    color: #ffffff;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    font-family: 'Noto Sans SC', -apple-system, Helvetica Neue sans-serif;
+  }
+}
+
+button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+img {
+  display: block;
 }
 
 .bounce-enter-active {
   animation: bounceIn .3s ease;
 }
+
 .bounce-leave-active {
   animation: fadeOut .3s ease;
 }
+
 @keyframes bounceIn {
   0% {
     transform: scale(0);
   }
+
   50% {
     transform: scale(1.2);
   }
+
   100% {
     transform: scale(1);
   }
