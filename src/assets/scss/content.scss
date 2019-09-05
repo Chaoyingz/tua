@@ -1,63 +1,32 @@
 .tua-content {
   position: absolute;
-  width: 400px;
+  width: 420px;
   line-height: 26px;
   min-height: 46px;
   z-index: 9999;
   font-size: 14px;
-  border-radius: 3px;
+  border-radius: 1px;
   box-sizing: border-box;
-  background-color: rgba(0, 0, 0, 0.84);
-  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
   transition: top .2s ease, left .2s ease;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  overflow: hidden;
 
-  &-menu {
-    display: flex;
+  &-source {
+    background-color: #41464B;
     height: 34px;
-    line-height: 32px;
-    background-color: #393939;
-    padding: 10px 2px;
-    box-sizing: border-box;
-
-    &__item {
-      width: 42px;
-      border-right: 1px solid #757575;
-
-      button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0 6px;
-        font: unset;
-        box-shadow: unset;
-        min-height: unset;
-
-        &:hover {
-          color: unset;
-          background-color: unset;
-          border-color: unset;
-          box-shadow: unset;
-        }
-
-        &:hover svg {
-          fill: #E5E5E5;
-        }
-      }
-
-      svg {
-        height: 100%;
-        width: 17px;
-        fill: #CCCCCC;
-        transition: fill .3s;
-      }
-    }
+    line-height: 34px;
+    padding: 0 10px;
+    color: #fff;
+    overflow: hidden;
+    font-family: 'Lora', serif;
   }
 
   &-result {
+    color: #41464B;
     text-align: left;
     letter-spacing: 1px;
-    color: #ffffff;
-    padding: 8px 10px;
+    padding: 6px 10px 8px;
     box-sizing: border-box;
     font-family: 'Noto Sans SC', -apple-system, Helvetica Neue sans-serif;
   }

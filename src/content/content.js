@@ -1,7 +1,6 @@
 import Vue from "vue";
 import App from "./Content.vue";
 import Storage from "@/storage";
-import VueClipboard from "vue-clipboard2";
 import { mouseupOutside } from "@/directive";
 
 /**
@@ -15,9 +14,6 @@ function createContentApp() {
 createContentApp();
 
 Vue.directive("mouseup-outside", mouseupOutside);
-
-VueClipboard.config.autoSetContainer = true;
-Vue.use(VueClipboard);
 
 Vue.use({
   install: Vue => {

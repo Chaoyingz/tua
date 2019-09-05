@@ -1,29 +1,14 @@
 <template>
   <transition name="bounce">
+    .
     <div
       class="tua-content"
       :style="pos"
       v-show="!isHidden"
       v-mouseup-outside="mouseUp"
     >
-      <div class="tua-content-menu">
-        <div class="tua-content-menu__item">
-          <button v-show="isPause" @click="speechPlay" title="阅读翻译">
-            <PlayButtonSvg />
-          </button>
-          <button v-show="!isPause" @click="speechPause" title="停止阅读">
-            <PauseButtonSvg />
-          </button>
-        </div>
-        <div class="tua-content-menu__item">
-          <button
-            title="复制文本内容"
-            v-clipboard:copy="result"
-            v-clipboard:success="onCopy"
-          >
-            <CopyButtonSvg />
-          </button>
-        </div>
+      <div class="tua-content-source">
+        {{ this.q }}
       </div>
       <div class="tua-content-result">
         {{ result }}
@@ -36,9 +21,6 @@
 import { KEY_STATUS_TUA } from "@/constant";
 import md5 from "md5";
 
-import PlayButtonSvg from "@/assets/svg/play-button.svg";
-import PauseButtonSvg from "@/assets/svg/pause-button.svg";
-import CopyButtonSvg from "@/assets/svg/copy-button.svg";
 export default {
   data() {
     return {
@@ -52,11 +34,6 @@ export default {
       speech: null,
       isPause: true
     };
-  },
-  components: {
-    PlayButtonSvg,
-    PauseButtonSvg,
-    CopyButtonSvg
   },
   methods: {
     /**
@@ -78,7 +55,7 @@ export default {
         this.isPause = true;
         return;
       }
-      this.pos.top = e.pageY + 15 + "px";
+      this.pos.top = e.pageY + "px";
       this.pos.left = e.pageX + "px";
       let parameter = this.makeParameter();
       this.translate(parameter);
@@ -116,7 +93,6 @@ export default {
           if (result && result.length >= 0) {
             this.result = result[0].dst.replace(/([\x20-\xFF]+)/g, " $1 ");
             this.isHidden = false;
-            this.textToSpeech();
           }
         }
       );
@@ -149,24 +125,16 @@ export default {
           this.speech = new Audio(
             "data:audio/wav;base64," + result.audioContent
           );
-          // this.speech.play();
+          this.speech.play();
+          this.isPause = false;
         }
       );
-    },
-    speechPlay() {
-      this.speech.play();
-      this.isPause = false;
-    },
-    speechPause() {
-      this.speech.pause();
-      this.isPause = true;
-    },
-    onCopy() {}
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-@import url("https://fonts.googleapis.com/css?family=Noto+Sans+SC:400,500,700&display=swap&subset=chinese-simplified");
+@import url("https://fonts.googleapis.com/css?family=Lora|Noto+Sans+SC&display=swap");
 @import "../assets/scss/content.scss";
 </style>
