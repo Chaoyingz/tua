@@ -11,3 +11,15 @@ export const mouseupOutside = {
     document.body.removeEventListener("mouseup", el.monuseUpEvent);
   }
 };
+
+export const mousedown = {
+  bind(el, binding, vnode) {
+    el.mousedownEvent = function(event) {
+      vnode.context[binding.expression](event);
+    };
+    document.body.addEventListener("mousedown", el.mousedownEvent);
+  },
+  unbind(el) {
+    document.body.removeEventListener("mousedown", el.mousedownEvent);
+  }
+};

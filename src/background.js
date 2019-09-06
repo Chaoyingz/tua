@@ -1,27 +1,25 @@
+import { translateBaidu, translateSougou } from "@/api";
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // eslint-disable-next-line no-undef
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.type == "get") {
-    fetch(request.url)
-      .then(response => response.text())
-      .then(text => sendResponse(text))
-      .catch(error => {
-        console.log(error);
+  const { type } = request;
+  switch (type) {
+    case "translate-baidu": {
+      translateBaidu(request.q).then(async res => {
+        sendResponse(res);
       });
-    return true;
-  }
-  if (request.type == "post") {
-    fetch(request.url, {
-      method: "POST",
-      body: JSON.stringify(request.data),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.text())
-      .then(text => sendResponse(text))
-      .catch(error => {
-        console.log(error);
+      return true;
+    }
+    case "translate-sougou": {
+      translateSougou(request.q).then(async res => {
+        await sleep(50);
+        sendResponse(res);
       });
-    return true;
+      return true;
+    }
   }
 });

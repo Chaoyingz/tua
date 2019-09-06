@@ -21,6 +21,7 @@
             rows="8"
             v-model="q"
             @keyup="translate"
+            placeholder="请输入任意文本..."
           ></textarea>
         </div>
         <div class="popup-content-target">
@@ -50,16 +51,13 @@ import { KEY_STATUS_TUA } from "@/constant";
 import TuaLoading from "@/components/Loading";
 import TuaLogoText from "@/assets/svg/tua-logo-text.svg";
 
-import md5 from "md5";
-import axios from "axios";
 export default {
   data() {
     return {
       isTuaOpen: true,
       isLoaded: false,
       q: "",
-      result: "",
-      target: "zh-CHS"
+      result: ""
     };
   },
   components: {
@@ -76,39 +74,17 @@ export default {
     }
   },
   methods: {
-    /**
-     * make payload with sougou translate API
-     */
-    makePayload() {
-      const pid = process.env.SOUGOU_PID;
-      const key = process.env.SOUGOU_KEY;
-      let salt =
-        Math.random()
-          .toString(36)
-          .substring(2, 15) +
-        Math.random()
-          .toString(36)
-          .substring(2, 15);
-      let sign = md5(pid + this.q + salt + key);
-      let payload = `from=auto&to=${this.target}&pid=${pid}&q=${
-        this.q
-      }&sign=${sign}&salt=${salt}`;
-      return payload;
-    },
     async translate() {
-      let payload = this.makePayload();
-      await axios({
-        method: "POST",
-        url: "http://fanyi.sogou.com/reventondc/api/sogouTranslate",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          // eslint-disable-next-line prettier/prettier
-          "Accept": "application/json"
-        },
-        data: payload
-      }).then(res => {
-        this.result = res.data.translation;
+      const response = await this.$message.send({
+        type: "translate-sougou",
+        q: this.q
       });
+      let translation = response.data.translation;
+      if (translation) {
+        this.result = translation.replace(/([\x20-\xFF]+)/g, " $1 ");
+      } else {
+        this.result = this.q;
+      }
     }
   }
 };
