@@ -24,22 +24,12 @@
             placeholder="请输入任意文本..."
           ></textarea>
         </div>
-        <div class="popup-content-target">
-          <!--
-          <div class="popup-content-target__item">
-            <button
-              @click="target = 'zh-CHS'"
-              :class="{ active: target === 'zh-CHS' }"
-            >
-              中文
-            </button>
-            <button @click="target = 'en'" :class="{ active: target === 'en' }">
-              英文
-            </button>
-          </div>
-        --></div>
+        <div class="popup-content-target"></div>
         <div class="popup-content-result">
           <span>{{ result }}</span>
+          <button v-clipboard:copy="result" class="clipboard" title="复制">
+            <icon-clip-board />
+          </button>
         </div>
       </div>
     </div>
@@ -50,6 +40,7 @@
 import { KEY_STATUS_TUA } from "@/constant";
 import TuaLoading from "@/components/Loading";
 import TuaLogoText from "@/assets/svg/tua-logo-text.svg";
+import iconClipBoard from "@/assets/svg/clipboard.svg";
 
 export default {
   data() {
@@ -62,7 +53,8 @@ export default {
   },
   components: {
     "tua-loading": TuaLoading,
-    "tua-logo-text": TuaLogoText
+    "tua-logo-text": TuaLogoText,
+    "icon-clip-board": iconClipBoard
   },
   async mounted() {
     this.isTuaOpen = await this.$storage.get(KEY_STATUS_TUA);

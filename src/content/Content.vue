@@ -28,8 +28,9 @@
 <script>
 import {
   KEY_STATUS_TUA,
-  TRANS_BLACK_LIST_CONTENT,
-  TRANS_WHITE_LIST_PAGE
+  TRS_SELECTION_BLACK_LIST,
+  TRS_TAG_PAGE_WHITE_LIST,
+  TRS_TAG_PAGE_CONTENT_LIST
 } from "@/constant";
 import TuaLogo from "@/assets/svg/tua-logo.svg";
 
@@ -56,17 +57,13 @@ export default {
       this.srcElement = e.srcElement.nodeName;
     },
     translatePage() {
-      try {
-        this.translateNode(document.body);
-      } catch (e) {
-        if (e !== this.breakException) throw e;
-      }
+      this.translateNode(document.body);
     },
     /**
      * Listen mouseUp event
      */
     async mouseUp(e) {
-      if (TRANS_BLACK_LIST_CONTENT.includes(this.srcElement)) {
+      if (TRS_SELECTION_BLACK_LIST.includes(this.srcElement)) {
         return;
       }
       let isTuaOpen = await this.$storage.get(KEY_STATUS_TUA);
@@ -118,29 +115,35 @@ export default {
         }
       }
     },
-    async translateNode(parentNode) {
-      if (parentNode) {
+    async translateNode(node) {
+      if (node) {
         let target = null;
-        const children = Array.from(parentNode.children);
-        if (children.length === 0) {
-          if (TRANS_WHITE_LIST_PAGE.includes(parentNode.nodeName)) {
-            let q = parentNode.innerText || parentNode.textContent;
-            if (q) {
-              const translation = await this.translate(q, "page");
-              let translationNode = parentNode.cloneNode();
-              translationNode.textContent = translation;
-              parentNode.classList.add("tua-trans", "tua-trans-source");
-              translationNode.classList.add("tua-trans", "tua-trans-result");
-              parentNode.parentNode.insertBefore(
-                translationNode,
-                parentNode.nextSibling
-              );
-              // console.log(`[${this.counter}]`, parentNode, q, translation);
-            }
-            // if (this.counter > 100) {
-            //   throw this.breakException;
-            // }
+        const children = Array.from(node.children);
+        if (
+          children.length === 0 &&
+          TRS_TAG_PAGE_WHITE_LIST.includes(node.nodeName)
+        ) {
+          let q = Node.innerText || node.textContent;
+          if (q) {
+            const translation = await this.translate(q, "page");
+            let translationNode = node.cloneNode();
+            translationNode.textContent = translation;
+            node.classList.add("tua-trans", "tua-trans-source");
+            translationNode.classList.add("tua-trans", "tua-trans-result");
+            node.parentNode.insertBefore(translationNode, Node.nextSibling);
           }
+        } else if (TRS_TAG_PAGE_CONTENT_LIST.includes(node.nodeName)) {
+          let q = node.innerText;
+          const translation = await this.translate(q, "page");
+          let translationNode = node.cloneNode();
+          translationNode.innerText = translation;
+          node.classList.add("tua-trans", "tua-trans-source");
+          translationNode.classList.add("tua-trans", "tua-trans-result");
+          node.parentNode.insertBefore(translationNode, node.nextSibling);
+          const nodeText = node.innerHTML
+            .split(/<[a-zA-Z0-9]*>([^<.*>;]*)<\/[a-zA-Z0-9]*>/)
+            .filter(x => x.trim() !== "");
+          console.log(node, nodeText);
         }
         for (let i = 0; i < children.length; i++) {
           target = await this.translateNode(children[i]);
