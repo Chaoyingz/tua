@@ -5,10 +5,13 @@
 chrome 翻译扩展，支持划词翻译和全文翻译。
 
 ### 截图
+划词翻译 ⬇️
 ![presentation](https://raw.githack.com/Caoyiii/tua/master/src/assets/img/cap-1.png)
 
+全文翻译 ⬇️
 ![presentation](https://raw.githack.com/Caoyiii/tua/master/src/assets/img/cap-2.png)
 
+单词翻译 ⬇️
 ![presentation](https://raw.githack.com/Caoyiii/tua/master/src/assets/img/cap-3.png)
 
 ### 下载
