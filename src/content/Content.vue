@@ -143,7 +143,7 @@ export default {
           const nodeText = node.innerHTML
             .split(/<[a-zA-Z0-9]*>([^<.*>;]*)<\/[a-zA-Z0-9]*>/)
             .filter(x => x.trim() !== "");
-          console.log(node, nodeText);
+          // console.log(node, nodeText);
         }
         for (let i = 0; i < children.length; i++) {
           target = await this.translateNode(children[i]);
