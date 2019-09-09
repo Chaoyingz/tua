@@ -39,19 +39,14 @@
   bottom: 20px;
   right: 20px;
   z-index: 99999;
-  button svg {
-    height: 30px;
-    width: 30px;
-    // padding: 8px 14px;
-    // box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
-    // color: #fff;
-    // background-color: #41464B;
-    // border-radius: 2px;
-    // transition: .3s ease;
-    // font-size: 14px;
-    // &:hover {
-    //   opacity: .8;
-    // }
+  button {
+    &:hover {
+      background-color: unset;
+    }
+    svg {
+      height: 30px;
+      width: 30px;
+    }
   }
 }
 

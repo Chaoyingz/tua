@@ -1,10 +1,18 @@
+/* eslint-disable no-undef */
 import { translateBaidu, translateSougou } from "@/api";
+import { KEY_STATUS_TUA } from "@/constant";
+import Storage from "@/lib/storage";
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// eslint-disable-next-line no-undef
+chrome.runtime.onInstalled.addListener(async reason => {
+  if (reason !== "update") {
+    Storage.set(KEY_STATUS_TUA, true);
+  }
+});
+
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   const { type } = request;
   switch (type) {

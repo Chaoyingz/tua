@@ -109,7 +109,7 @@ export default {
             this.result = translation[0].dst.replace(/([\x20-\xFF]+)/g, " $1 ");
             this.isHidden = false;
           } else {
-            this.result = "获取翻译失败, 请重试.";
+            this.result = "请选择合适的文本后重试.";
             this.isHidden = false;
           }
         }
@@ -140,6 +140,7 @@ export default {
           node.classList.add("tua-trans", "tua-trans-source");
           translationNode.classList.add("tua-trans", "tua-trans-result");
           node.parentNode.insertBefore(translationNode, node.nextSibling);
+          // eslint-disable-next-line no-unused-vars
           const nodeText = node.innerHTML
             .split(/<[a-zA-Z0-9]*>([^<.*>;]*)<\/[a-zA-Z0-9]*>/)
             .filter(x => x.trim() !== "");
