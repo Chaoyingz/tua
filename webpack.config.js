@@ -1,5 +1,4 @@
 const path = require("path");
-const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
 const { htmlPlugin } = require("./plugin");
 const { version } = require("./package.json");
@@ -10,6 +9,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
   .BundleAnalyzerPlugin;
+const isDev = process.env.NODE_ENV !== "production";
 
 const config = {
   mode: process.env.NODE_ENV,
@@ -80,9 +80,7 @@ const config = {
         test: /\.(s*)css$/,
         exclude: path.resolve(__dirname, "./src/content"),
         use: [
-          process.env.NODE_ENV !== "production"
-            ? "vue-style-loader"
-            : MiniCssExtractPlugin.loader,
+          isDev ? "vue-style-loader" : MiniCssExtractPlugin.loader,
           "css-loader",
           "postcss-loader",
           "sass-loader"
@@ -95,9 +93,8 @@ const config = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new VueLoaderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin([
       { from: "icons", to: "icons" },
       {

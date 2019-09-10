@@ -1,4 +1,6 @@
-body:not(footer):not(header) p.tua-trans {
+main p.tua-trans,
+#main p.tua-trans,
+.main p.tua-trans {
   display: block;
   padding-top: 0;
   padding-right: 5px;
@@ -6,13 +8,19 @@ body:not(footer):not(header) p.tua-trans {
   padding-left: 15px;
   margin-bottom: 10px;
 }
-body:not(footer):not(header) p.tua-trans-source {
+
+main p.tua-trans-source,
+#main p.tua-trans-source,
+.main p.tua-trans-source {
   border-left: 3px solid #d3d3d3;
   color: #646464;
   margin-bottom: 0;
   padding-bottom: 2px;
 }
-body:not(footer):not(header) p.tua-trans-result {
+
+main p.tua-trans-result,
+#main p.tua-trans-result,
+.main p.tua-trans-result {
   border-left: 3px solid #42b983;
   color: #41464B;
   margin-top: 0;

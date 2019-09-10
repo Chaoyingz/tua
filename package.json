@@ -7,7 +7,9 @@
     "dev": "cross-env NODE_ENV=development webpack --watch --hide-modules",
     "build": "cross-env NODE_ENV=production webpack --hide-modules",
     "analyzer": "cross-env NODE_ENV=production ANALYZER=true webpack --hide-modules",
-    "release-major": "standard-version -r major"
+    "release-major": "standard-version -r major",
+    "release-minor": "standard-version -r minor",
+    "release-patch": "standard-version -r patch"
   },
   "main": "index.js",
   "author": "chaunceywe",
@@ -43,7 +45,6 @@
     "sass-loader": "^8.0.0",
     "standard-version": "^7.0.0",
     "style-loader": "^1.0.0",
-    "terser-webpack-plugin": "^2.0.1",
     "url-loader": "^2.1.0",
     "vue-clipboard2": "^0.3.1",
     "vue-loader": "^15.7.1",

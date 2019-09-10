@@ -12,9 +12,7 @@
         <div class="tua-content-source">
           {{ this.q }}
         </div>
-        <div class="tua-content-result">
-          {{ result }}
-        </div>
+        <div class="tua-content-result">{{ result }}</div>
       </div>
     </transition>
     <div class="tua-menu">
@@ -123,14 +121,14 @@ export default {
           children.length === 0 &&
           TRS_TAG_PAGE_WHITE_LIST.includes(node.nodeName)
         ) {
-          let q = Node.innerText || node.textContent;
+          let q = node.innerText || node.textContent;
           if (q) {
             const translation = await this.translate(q, "page");
             let translationNode = node.cloneNode();
             translationNode.textContent = translation;
             node.classList.add("tua-trans", "tua-trans-source");
             translationNode.classList.add("tua-trans", "tua-trans-result");
-            node.parentNode.insertBefore(translationNode, Node.nextSibling);
+            node.parentNode.insertBefore(translationNode, node.nextSibling);
           }
         } else if (TRS_TAG_PAGE_CONTENT_LIST.includes(node.nodeName)) {
           let q = node.innerText;
@@ -141,10 +139,6 @@ export default {
           translationNode.classList.add("tua-trans", "tua-trans-result");
           node.parentNode.insertBefore(translationNode, node.nextSibling);
           // eslint-disable-next-line no-unused-vars
-          const nodeText = node.innerHTML
-            .split(/<[a-zA-Z0-9]*>([^<.*>;]*)<\/[a-zA-Z0-9]*>/)
-            .filter(x => x.trim() !== "");
-          // console.log(node, nodeText);
         }
         for (let i = 0; i < children.length; i++) {
           target = await this.translateNode(children[i]);
