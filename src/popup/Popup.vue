@@ -82,6 +82,12 @@ export default {
 };
 </script>
 
+<style>
+body {
+  margin: 0;
+}
+</style>
+
 <style lang="scss" scoped>
 @import "../assets/scss/popup.scss";
 </style>

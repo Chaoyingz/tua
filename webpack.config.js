@@ -1,27 +1,46 @@
 const path = require("path");
+const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
+const { htmlPlugin } = require("./plugin");
 const { version } = require("./package.json");
 const { VueLoaderPlugin } = require("vue-loader");
+const TerserPlugin = require("terser-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
 
 const config = {
   mode: process.env.NODE_ENV,
   context: __dirname + "/src",
   entry: {
     background: "./background.js",
-    "popup/popup": "./popup/popup.js",
-    "options/options": "./options/options.js",
-    "content/content": "./content/content.js"
+    popup: "./popup",
+    options: "./options",
+    content: "./content"
   },
   output: {
     path: __dirname + "/dist",
-    filename: "[name].js"
+    filename: "js/[name].js",
+    chunkFilename: "js/[name].js"
   },
   resolve: {
     extensions: [".js", ".vue", "json"],
     alias: {
       "@": path.resolve(__dirname, "./src/")
     }
+  },
+  stats: {
+    entrypoints: false,
+    children: false
+  },
+  performance: {
+    hints: false
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
   },
   module: {
     rules: [
@@ -30,18 +49,19 @@ const config = {
         loaders: "vue-loader",
         options: {
           loaders: {
-            sass: ["vue-style-loader", "css-loader", "sass-loader"]
+            sass: [
+              process.env.NODE_ENV !== "production"
+                ? "vue-style-loader"
+                : MiniCssExtractPlugin.loader,
+              "css-loader",
+              "sass-loader"
+            ]
           }
         }
       },
       {
         test: /\.js$/,
-        loader: "babel-loader",
-        exclude: file => /node_modules/.test(file) && !/\.vue\.js/.test(file)
-      },
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        loader: "babel-loader"
       },
       {
         test: /\.(png|jpg|jpeg|gif|ico)$/,
@@ -52,8 +72,21 @@ const config = {
         }
       },
       {
-        test: /\.scss$/,
-        use: ["vue-style-loader", "css-loader", "sass-loader"]
+        test: /\.(s*)css$/,
+        include: path.resolve(__dirname, "./src/content"),
+        use: ["vue-style-loader", "css-loader", "postcss-loader", "sass-loader"]
+      },
+      {
+        test: /\.(s*)css$/,
+        exclude: path.resolve(__dirname, "./src/content"),
+        use: [
+          process.env.NODE_ENV !== "production"
+            ? "vue-style-loader"
+            : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader"
+        ]
       },
       {
         test: /\.svg$/,
@@ -62,21 +95,11 @@ const config = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin([
       { from: "icons", to: "icons" },
-      {
-        from: "popup/popup.html",
-        to: "popup/popup.html"
-      },
-      {
-        from: "options/options.html",
-        to: "options/options.html"
-      },
-      {
-        from: "content/content.html",
-        to: "content/content.html"
-      },
       {
         from: "manifest.json",
         to: "manifest.json",
@@ -93,8 +116,17 @@ const config = {
         }
       }
     ]),
-    new Dotenv({ path: ".env.local" })
+    new Dotenv({ path: ".env.local" }),
+    htmlPlugin("popup"),
+    htmlPlugin("options"),
+    new MiniCssExtractPlugin({
+      filename: "css/[name].[chunkhash:8].css",
+      chunkFilename: "css/[name].[chunkhash:8].css"
+    })
   ]
 };
+if (process.env.ANALYZER) {
+  config.plugins.push(new BundleAnalyzerPlugin());
+}
 
 module.exports = config;
