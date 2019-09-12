@@ -1,7 +1,6 @@
 <template>
   <div>
-    <transition name="bounce">
-      .
+    <transition name="tua-content">
       <div
         class="tua-content"
         :style="pos"
@@ -9,10 +8,8 @@
         v-mouseup-outside="mouseUp"
         v-mousedown="mouseDown"
       >
-        <div class="tua-content-source">
-          {{ this.q }}
-        </div>
         <div class="tua-content-result">{{ result }}</div>
+        <div class="tua-content-triangle"></div>
       </div>
     </transition>
     <div class="tua-menu">
@@ -70,15 +67,15 @@ export default {
         .getSelection()
         .toString()
         .trim();
-      if (!this.q || !isTuaOpen) {
+      if (this.q == "" || !isTuaOpen) {
         this.isHidden = true;
         this.result = "";
         this.q = "";
-        return;
+      } else {
+        this.pos.top = e.pageY + 30 + "px";
+        this.pos.left = e.pageX - 210 + "px";
+        this.translate(this.q, "selection");
       }
-      this.pos.top = e.pageY + "px";
-      this.pos.left = e.pageX + "px";
-      this.translate(this.q, "selection");
     },
     /**
      * Translate other languages to Chinese
@@ -107,7 +104,7 @@ export default {
             this.result = translation[0].dst.replace(/([\x20-\xFF]+)/g, " $1 ");
             this.isHidden = false;
           } else {
-            this.result = "请选择合适的文本后重试.";
+            this.result = "请选择适当的文本后重试.";
             this.isHidden = false;
           }
         }
