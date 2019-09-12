@@ -7,6 +7,6 @@ exports.htmlPlugin = name =>
     cache: true,
     inject: "body",
     filename: `./pages/${name}.html`,
-    template: "../public/index.html",
+    template: "./common/index.html",
     chunks: [name]
   });

@@ -3,7 +3,7 @@
   z-index: 9999;
   width: 400px;
   line-height: 30px;
-  min-height: 50px;
+  min-height: 46px;
   font-size: 14px;
   border-radius: 4px;
   box-sizing: border-box;
@@ -14,7 +14,7 @@
     color: #fff;
     text-align: left;
     letter-spacing: 1px;
-    font-size: 16px;
+    font-size: 15px;
     padding: 8px 12px 8px 16px;
     box-sizing: border-box;
     font-family: 'Noto Sans SC', -apple-system, Helvetica Neue sans-serif;
@@ -30,48 +30,30 @@
     box-shadow: rgba(0, 0, 0, 0.54) 1px 1px 1px -1px;
     background: rgba(0, 0, 0, 0.84);
   }
+
+  &-enter-active {
+    animation: fadeIn .3s ease;
+  }
+
+  &-leave-active {
+    animation: fadeOut .2s ease;
+  }
 }
 
-.tua-menu  {
+.tua-menu {
   position: fixed;
   bottom: 20px;
   right: 20px;
   z-index: 99999;
+
   button {
     &:hover {
       background-color: unset;
     }
+
     svg {
       height: 30px;
       width: 30px;
     }
-  }
-}
-
-.tua-content-enter-active {
-  animation: bounceIn .5s ease;
-}
-
-.tua-content-leave-active {
-  animation: fadeOut .2s ease;
-}
-
-@keyframes bounceIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
   }
 }

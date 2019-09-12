@@ -50,10 +50,9 @@ const config = {
         options: {
           loaders: {
             sass: [
-              process.env.NODE_ENV !== "production"
-                ? "vue-style-loader"
-                : MiniCssExtractPlugin.loader,
+              isDev ? "vue-style-loader" : MiniCssExtractPlugin.loader,
               "css-loader",
+              "postcss-loader",
               "sass-loader"
             ]
           }

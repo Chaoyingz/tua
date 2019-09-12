@@ -72,7 +72,7 @@ export default {
         this.result = "";
         this.q = "";
       } else {
-        this.pos.top = e.pageY + 30 + "px";
+        this.pos.top = e.pageY + 10 + "px";
         this.pos.left = e.pageX - 210 + "px";
         this.translate(this.q, "selection");
       }
@@ -156,5 +156,6 @@ export default {
 
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css?family=Lora|Noto+Sans+SC&display=swap");
+@import "../assets/scss/common.scss";
 @import "../assets/scss/content.scss";
 </style>
