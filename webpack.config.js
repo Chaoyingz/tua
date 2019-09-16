@@ -23,7 +23,6 @@ const config = {
   output: {
     path: __dirname + "/dist",
     filename: "js/[name].js",
-    publicPath: __dirname + "/dist/",
     chunkFilename: "js/[name].js"
   },
   resolve: {
@@ -61,12 +60,7 @@ const config = {
       },
       {
         test: /\.js$/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            plugins: ["@babel/plugin-syntax-dynamic-import"]
-          }
-        }
+        loader: "babel-loader"
       },
       {
         test: /\.(png|jpg|jpeg|gif|ico)$/,
@@ -98,7 +92,7 @@ const config = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: true }),
     new VueLoaderPlugin(),
     new CopyWebpackPlugin([
       { from: "icons", to: "icons" },
@@ -122,8 +116,8 @@ const config = {
     htmlPlugin("popup"),
     htmlPlugin("options"),
     new MiniCssExtractPlugin({
-      filename: "css/[name].[chunkhash:8].css",
-      chunkFilename: "css/[name].[chunkhash:8].css"
+      filename: "css/[name].css",
+      chunkFilename: "css/[name].css"
     })
   ]
 };
