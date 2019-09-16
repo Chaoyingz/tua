@@ -26,7 +26,7 @@ import {
   TRS_SELECTION_BLACK_LIST,
   TRS_TAG_PAGE_WHITE_LIST,
   TRS_TAG_PAGE_CONTENT_LIST
-} from "@/constant";
+} from "@/lib/constant";
 import TuaLogo from "@/assets/svg/tua-logo.svg";
 
 export default {

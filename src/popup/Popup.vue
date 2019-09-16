@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { KEY_STATUS_TUA } from "@/constant";
+import { KEY_STATUS_TUA } from "@/lib/constant";
 import TuaLoading from "@/components/Loading";
 import TuaLogoText from "@/assets/svg/tua-logo-text.svg";
 import iconClipBoard from "@/assets/svg/clipboard.svg";

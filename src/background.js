@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { translateBaidu, translateSougou } from "@/api";
-import { KEY_STATUS_TUA } from "@/constant";
+import { KEY_STATUS_TUA } from "@/lib/constant";
 import Storage from "@/lib/storage";
 
 function sleep(ms) {

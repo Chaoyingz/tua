@@ -23,6 +23,7 @@ const config = {
   output: {
     path: __dirname + "/dist",
     filename: "js/[name].js",
+    publicPath: __dirname + "/dist/",
     chunkFilename: "js/[name].js"
   },
   resolve: {
@@ -60,7 +61,12 @@ const config = {
       },
       {
         test: /\.js$/,
-        loader: "babel-loader"
+        use: {
+          loader: "babel-loader",
+          options: {
+            plugins: ["@babel/plugin-syntax-dynamic-import"]
+          }
+        }
       },
       {
         test: /\.(png|jpg|jpeg|gif|ico)$/,

@@ -11,7 +11,7 @@ export const translateBaidu = function(q) {
   const payload = {
     from,
     to,
-    q: q,
+    q: encodeURIComponent(q),
     appid,
     salt,
     sign
@@ -38,7 +38,7 @@ export const translateSougou = function(q) {
     from,
     to,
     pid,
-    q: q,
+    q: encodeURIComponent(q),
     sign,
     salt
   };
