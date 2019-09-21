@@ -92,7 +92,9 @@ const config = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin({ cleanStaleWebpackAssets: true }),
+    new CleanWebpackPlugin({
+      cleanStaleWebpackAssets: false
+    }),
     new VueLoaderPlugin(),
     new CopyWebpackPlugin([
       { from: "icons", to: "icons" },

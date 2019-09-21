@@ -72,8 +72,7 @@ export default {
         this.result = "";
         this.q = "";
       } else {
-        this.pos.top = e.pageY + 10 + "px";
-        this.pos.left = e.pageX - 210 + "px";
+        this.setPos(e.pageY, e.pageX);
         this.translate(this.q, "selection");
       }
     },
@@ -145,6 +144,17 @@ export default {
         }
       }
       return null;
+    },
+    setPos(y, x) {
+      if (x < 200) {
+        x = 0;
+      } else if (x > screen.width - 210) {
+        x = screen.width - 410;
+      } else {
+        x -= 210;
+      }
+      this.pos.top = `${y + 10}px`;
+      this.pos.left = `${x}px`;
     }
   }
 };
