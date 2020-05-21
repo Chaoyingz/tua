@@ -83,12 +83,12 @@ export default {
       switch (source) {
         case "page": {
           const response = await this.$message.send({
-            type: "translate-sougou",
+            type: "translate-baidu",
             q: q
           });
-          let translation = response.data.translation;
+          let translation = response.data.trans_result;
           if (translation) {
-            return translation.replace(/([\x20-\xFF]+)/g, " $1 ");
+            return translation[0].dst.replace(/([\x20-\xFF]+)/g, " $1 ");
           } else {
             return "";
           }
